@@ -30,19 +30,30 @@ WHERE co.Region = 'SouthEast Asia' ORDER By cl.Language ;
 #6.	Using a single query, list 25 cities around the world that start with the letter F.
 
 SELECT Name FROM city 
-WHERE Name IN '%F'; 
+WHERE Name LIKE 'F%'; 
 
 #7.	Using COUNT and JOIN ... ON, get the number of cities in China.
 
+SELECT COUNT(id) from city WHERE CountryCode = 'CHN'; #363
+
+SELECT count(id) FROM city ci 
+JOIN country co ON ci.CountryCode=co.code 
+WHERE co.name ='CHINA' ;
 
 #8.	Using IS NOT NULL, ORDER BY, and LIMIT, which country has the lowest population? Discard non-zero populations.
 
+SELECT name, Population  FROM country 
+WHERE Population IS NOT NULL AND Population !=0
+ORDER BY Population 
+LIMIT 1;
 
 #9.	Using aggregate functions, return the number of countries the database contains.
 
+SELECT DISTINCT COUNT(code) from country ;
 
 #10.	What are the top ten largest countries by area?
 
+SELECT Name  FROM country ORDER BY SurfaceArea DESC LIMIT 10;
 
 #11.	List the five largest cities by population in Japan.
 
